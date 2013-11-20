@@ -1,0 +1,246 @@
+﻿html, body, img {	
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+}
+
+html, body { height: 100%; }
+
+body {
+	text-align: center;
+	/*font-family: Roboto, Tahoma, Geneva, sans-serif;*/
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-tap-highlight-color: transparent;
+	background-color: #545454;
+	color: #ffffff;
+}
+
+a {
+	color: #28E330;
+	font-weight: bold;
+	text-shadow: 1px 1px 0px #000000;
+	text-decoration: none;
+}
+
+.header {
+	position: fixed;
+	width: 100%;
+	left: 0px;
+	top: 0px;
+	height: 50px;
+	z-index: 99;
+	vertical-align: middle;
+	text-align: left;
+	line-height: 48px;
+	font-size: 20px;
+	background-color: #111111;
+	background-image: -webkit-linear-gradient(top, #545454, #111111);
+	-webkit-box-shadow: 0px 2px 3px #545454;
+	box-shadow: 0px 2px 3px #545454;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.backArrow {
+	float: left;
+	width: 16px;
+	font-size: 42px;
+	line-height: 40px;
+	color: #9A9A9A;
+}
+
+.content {
+	z-index: 98;
+	padding-top: 53px;
+	padding-bottom: 8px;
+}
+
+.overlay {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	z-index: 99;
+}
+
+.mobClass, .marketClass {
+	float: left;
+	line-height: 48px;
+	font-weight: bold;
+	font-size: 22px;
+	text-shadow: 0px 0px 1px #ffffff;
+}
+.mobClass {
+	color: #28E330;
+	font-style: italic;
+}
+.marketClass {
+	color: #ffffff;
+}
+
+.menuItem {
+	clear: both;
+	margin: 8px;
+	padding: 4px;
+	font-size: 24px;
+	line-height: 32px;
+	text-align: left;
+	background-color: #111111;
+	-webkit-border-radius: 2px;
+	-webkit-box-shadow: 0px 0px 2px #ffffff;
+	box-shadow: 0px 0px 2px #ffffff;
+}
+
+.menuArrow {
+	float: right;
+	font-size: 34px;
+	line-height: 24px;
+}
+
+.extendArrow {
+	float: right;
+}
+
+.listItem {
+	overflow: hidden;
+	margin: 4px;
+	padding: 4px;
+	background-color: #111111;
+	background-image: -webkit-linear-gradient(top, #545454, #111111);
+	-webkit-border-radius: 2px;
+	-webkit-box-shadow: 0px 0px 1px #ffffff;
+}
+
+.listTitle, .newsDate, .listContent {
+	text-align: left;
+}
+.listTitle {
+	font-size: 18px;
+}
+.newsDate {
+	font-size: 10px;
+	color: #c0c0c0;
+}
+.listContent {
+	font-size: 14px;
+}
+.newsImage {
+	float: right;
+	-webkit-border-radius: 2px;
+}
+
+.inputSearch, .inputQty {
+	outline: none;
+	background-color: #444444;
+	background-image: -webkit-linear-gradient(top, #545454, #444444);
+	color: #ffffff;
+	-webkit-border-radius: 2px;
+	border: 0;
+	height: 42px;
+	font-size: 24px;
+	-webkit-box-shadow: 0px 0px 2px #ffffff;
+	width: 96%;
+}
+
+.noResults {
+	margin-top: 8px;
+	font-size: 18px;
+}
+
+.floatingBadge {
+	float: right;
+	background-color: #111111;
+	-webkit-border-radius: 2px;
+	-webkit-box-shadow: 0px 0px 1px #ffffff;
+	padding: 4px;
+}
+
+.stockDetails {
+	margin: 4px;
+	-webkit-border-radius: 2px;
+	background-color: #545454;
+}
+
+.stockDetailsHead {
+	margin: 4px;
+	padding: 4px;
+	background-color: #111111;
+	text-align: left;
+	-webkit-border-radius: 2px 2px 0px 0px;
+	overflow: hidden;
+	-webkit-box-shadow: 0px 1px 3px #000000;
+}
+
+.toggleButton {
+	margin: 4px;
+	padding: 4px;
+	background-color: #111111;
+	text-align: left;
+	-webkit-box-shadow: 0px 1px 3px #000000;
+}
+
+.dataTable {
+	width: 100%;
+	white-space: nowrap;
+	table-layout: fixed;
+}
+
+.dataLabel, .dataCell, .dataCellUp, .dataCellDown {
+	width: 50%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+	
+.dataCell, .dataCellUp, .dataCellDown {
+	font-weight: bold;
+	text-shadow: 1px 1px 0px #000000;
+}
+.dataCellUp {
+	color: #00ff00;
+}
+.dataCellDown {
+	color: #ff0000;
+}
+
+.chart {
+	width: 100%;
+	height: 300px;
+	font-weight: bold;
+}
+
+.chartButtons {
+	overflow: hidden;
+	margin-right: 16px;
+}
+
+.chartButton, .chartButtonSelected {
+	float: right;
+	-webkit-border-radius: 2px;
+	-webkit-box-shadow: 0px 0px 1px #ffffff;
+	padding: 4px;
+	margin-right: 8px;
+}
+
+.chartButton {
+	background-color: #111111;
+}
+
+.chartButtonSelected {
+	background-color: #444444;
+	background-image: -webkit-linear-gradient(top, #545454, #444444);
+}
+
+.bottomAdSpacer {
+	height: 60px;
+}
+
+.bottomAd {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	height: 60px;
+	width: 100%;
+	text-align: center;
+}
