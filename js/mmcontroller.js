@@ -9,6 +9,7 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 	var i;
 	$scope.realTimeFrequency = 4500;
 	window.debugScope = $scope;
+	$scope.Math = window.Math;
 	$scope.screens = [
 		{id: "search", label: "Search Quote", inMainMenu: true},
 		{id: "stockDetails", label: "", inMainMenu: false},
@@ -79,11 +80,22 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 	};
 
 	$scope.getPtfTitleValue = function (stock) {
-		var last = stock.stockData.LastTradePriceOnly;
-		while (last.indexOf(",") >= 0) {
-			last = last.replace(",", "");
+		var last = 0;
+		if (stock && stock.stockData && stock.stockData.LastTradePriceOnly) {
+			last = stock.stockData.LastTradePriceOnly;
+			while (last.indexOf(",") >= 0) {
+				last = last.replace(",", "");
+			}
 		}
-		return Math.round(stock.quantity * window.parseFloat(last) * 100) / 100;
+		return stock.quantity * window.parseFloat(last);
+	};
+
+	$scope.getPtfValue = function () {
+		var total = 0;
+		$scope.portfolio.forEach(function (s) {
+			total += $scope.getPtfTitleValue(s);
+		});
+		return total;
 	};
 
 	// external links in default browser

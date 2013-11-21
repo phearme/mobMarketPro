@@ -29,7 +29,7 @@
 				</span>
 				<img style="float: left" src="img/logo.png" />
 				<span ng-hide="selectedScreen">
-					<span class="mobClass">mob</span><span class="marketClass">Market</span> (Pro)
+					<span class="mobClass">mob</span><span class="marketClass">Market <i>Pro</i></span>
 				</span>
 				<span ng-show="selectedScreen && selectedScreen.id != 'stockDetails' && selectedScreen.id != 'chart'" ng-bind="selectedScreen.label"></span>
 				<span ng-show="selectedStock && (selectedScreen.id == 'stockDetails' || selectedScreen.id == 'chart')" ng-bind="selectedStock.symbol"></span>
@@ -41,7 +41,7 @@
 		<div ng-show="selectedScreen.id == 'about'" class="content" ng-cloak>
 			<div style="text-align: left; margin: 12px; overflow: hidden;">
 				<div style="float: left;">
-					<span class="mobClass">mob</span><span class="marketClass">Market</span> Pro
+					<span class="mobClass">mob</span><span class="marketClass">Market <i>Pro</i></span>
 				</div>
 				<div style="float: right;">
 					<h3>Version 3.1.0</h3>
@@ -83,6 +83,14 @@
 				Your portfolio list is empty.
 				<br />Search for quotes and add a quote to your portfolio.
 			</div>
+			<div ng-hide="portfolio.length == 0" class="menuItem">
+				<table class="dataTable">
+					<tr>
+						<td class="dataLabel" style="text-align: left;">Total Value</td>
+						<td class="dataCell" style="text-align: right;" ng-bind="Math.round(getPtfValue() * 100) / 100"></td>
+					</tr>
+				</table>
+			</div>
 			<div ng-repeat="stock in portfolio" class="listItem" touch-action="selectStock" touch-btn="{{stock}}">
 				<div class="floatingBadge" ng-bind="stock.symbol"></div>
 				<div class="listTitle" ng-bind="stock.name"></div>
@@ -108,7 +116,7 @@
 					</tr>
 					<tr>
 						<td class="dataLabel" style="text-align: left;">Value</td>
-						<td class="dataCell" style="text-align: right;" ng-bind="getPtfTitleValue(stock)"></td>
+						<td class="dataCell" style="text-align: right;" ng-bind="Math.round(getPtfTitleValue(stock) * 100) / 100"></td>
 					</tr>
 				</table>
 			</div>
@@ -246,8 +254,8 @@
 						<tr>
 							<td>&nbsp;</td>
 							<td>
-								<span class="chartButton" style="float: left;" touch-btn="ok" touch-action="addToPtf">Ok</span>
 								<span class="chartButton" touch-btn="cancel" touch-action="addToPtf">Cancel</span>
+								<span class="chartButton" style="margin-right: 14px;" touch-btn="ok" touch-action="addToPtf">Ok</span>
 							</td>
 						</tr>
 					</table>
