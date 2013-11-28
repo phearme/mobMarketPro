@@ -18,6 +18,7 @@
 	<script type="text/javascript" src="js/ysearch.js"></script>
 	<script type="text/javascript" src="js/gquotes.js"></script>
 	<script type="text/javascript" src="js/yquotes.js"></script>
+	<script type="text/javascript" src="js/mmapi.js"></script>
 </head>
 <body ng-controller="mmCtrl">
 	<div id="screenMain" ng-cloak>
@@ -277,6 +278,38 @@
 				<div ng-repeat="lengthItem in chartLengthOrdered" ng-class="getChartButtonClass(lengthItem.key)" touch-btn="{{lengthItem.key}}" touch-action="setChartLength" ng-bind="lengthItem.key"></div>
 			</div>
 			<div ng-hide="loading" id="divChart" class="chart" draw-chart=""></div>
+		</div>
+		<div ng-show="selectedScreen.id == 'backuprestore'" class="content" ng-cloak>
+			<div class="listItem">
+				<div style="text-align: left;">
+					<p>Backup your Portfolio data in the cloud, and restore your data from anywhere, anytime, on any device.</p>
+				</div>
+				<div>
+					<div style="float: left; font-size: 74px;">&#9000;</div>
+					<div style="float: right; font-size: 74px;">&#9729;</div>
+					<div style="overflow: hidden; text-align: center; padding: 4px; margin: 4px;">
+						<div style="width: 98%">
+							<span class="chartButton" style="font-size: 21px; width: 90%;" touch-btn="backup" touch-action="backupRestore">Backup &#8674;</span>
+							<br /><br />
+						</div>
+						<div style="width: 98%">
+							<span class="chartButton" style="font-size: 21px; width: 90%;" touch-btn="restore" touch-action="backupRestore">&#8672; Restore</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-show="selectedScreen.id == 'backuprestorestatus'" class="content" ng-cloak>
+			<div class="listItem" style="text-align: center;">
+				<div style="font-size: 74px;">&#9729;</div>
+				<div ng-hide="backupRestoreDone">Just a moment...</div>
+				<div ng-show="backupSuccess">
+					<p>Your Portfolio data has now been backed up. Please copy and save the following code. This code will be asked when restoring your data.</p>
+					<div class="listItem" style="font-size: 26px; font-weight: bold; text-shadow: 0 0 2px #ffffff;" ng-bind="backupCode"></div>
+					<span class="chartButton" style="width: 94%; margin-left: 8px;" touch-btn="" touch-action="selectScreen">Ok</span>
+				</div>
+				
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript" src="js/angular.min.js"></script>

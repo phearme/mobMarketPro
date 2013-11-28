@@ -1,5 +1,5 @@
 ﻿/*jslint browser:true*/
-/*global console, angular, NewsReader, YAHOO, YQuotes, GQuotes, google, $*/
+/*global console, angular, NewsReader, YAHOO, YQuotes, GQuotes, MMApi, google, $*/
 var newsReader = new NewsReader(),
 	mmapp = angular.module("mmapp", ["ngSanitize"]);
 
@@ -16,8 +16,10 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 		{id: "news", label: "Financial News", inMainMenu: true},
 		{id: "watchlist", label: "Watch List", inMainMenu: true},
 		{id: "portfolio", label: "Portfolio", inMainMenu: true},
-		{id: "about", label: "About", inMainMenu: true},
-		{id: "chart", label: "", inMainMenu: false}
+		{id: "chart", label: "", inMainMenu: false},
+		{id: "backuprestore", label: "Backup • Restore", inMainMenu: true},
+		{id: "backuprestorestatus", label: "Backup • Restore", inMainMenu: false},
+		{id: "about", label: "About", inMainMenu: true}
 	];
 	$scope.chartLength = {
 		"1w": 7,
@@ -54,6 +56,7 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 	$scope.chart = undefined;
 	$scope.watchlist = [];
 	$scope.portfolio = [];
+	$scope.portfolios = [];
 	$scope.chooseQtyPtf = false;
 	$scope.inputQty = 1;
 
@@ -206,6 +209,8 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 			$scope.selectScreen(undefined);
 			break;
 		case "search":
+		case "backuprestore":
+		case "backuprestorestatus":
 		case "about":
 			$scope.selectScreen(undefined);
 			break;
@@ -618,6 +623,29 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 		$scope.portfolio = $scope.previousVersionPortfolio();
 	}
 	$scope.sortPortfolio();
+
+	$scope.backupRestore = function (action) {
+		$scope.loading = true;
+		$scope.backupRestoreDone = false;
+		$scope.backupSuccess = false;
+		$scope.backupCode = "";
+		$scope.selectScreenById("backuprestorestatus");
+		if (action === "backup") {
+			MMApi.setPortfolio($scope.portfolio, function (ptfId) {
+				var code = MMApi.encodeId(ptfId);
+				if (code !== "") {
+					$scope.safeApply(function () {
+						$scope.backupRestoreDone = true;
+						$scope.backupSuccess = true;
+						$scope.backupCode = code;
+						$scope.loading = false;
+					});
+				}
+			});
+		} else if (action === "restore") {
+			//...
+		}
+	};
 
 	// handle device back button
 	document.addEventListener("backbutton", function () {
