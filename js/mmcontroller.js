@@ -633,25 +633,29 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 		$scope.backupCode = "";
 		$scope.enterRestoreCode = false;
 		if (action === "backup") {
-			$scope.selectScreenById("backuprestorestatus");
-			MMApi.setPortfolio($scope.portfolio, function (ptfId) {
-				var code = "";
-				if (ptfId) {
-					code = MMApi.encodeId(ptfId);
-				}
-				if (code !== "") {
-					$scope.safeApply(function () {
-						$scope.backupCode = code;
-						$scope.backupRestoreDone = true;
-						$scope.backupSuccess = true;
-						$scope.loading = false;
-					});
-				} else {
-					$scope.safeApply(function () {
-						$scope.selectScreen(undefined);
-					});
-				}
-			});
+			if ($scope.portfolio.length === 0) {
+				$scope.selectScreenById("portfolio");
+			} else {
+				$scope.selectScreenById("backuprestorestatus");
+				MMApi.setPortfolio($scope.portfolio, function (ptfId) {
+					var code = "";
+					if (ptfId) {
+						code = MMApi.encodeId(ptfId);
+					}
+					if (code !== "") {
+						$scope.safeApply(function () {
+							$scope.backupCode = code;
+							$scope.backupRestoreDone = true;
+							$scope.backupSuccess = true;
+							$scope.loading = false;
+						});
+					} else {
+						$scope.safeApply(function () {
+							$scope.selectScreen(undefined);
+						});
+					}
+				});
+			}
 		} else if (action === "enterrestorecode") {
 			$scope.inputRestoreCode = "";
 			$scope.enterRestoreCode = true;
@@ -659,11 +663,12 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 			var ptfId = "";
 			$scope.selectScreenById("backuprestorestatus");
 			if ($scope.restoreCode !== "") {
-				var ptfId = MMApi.decodeId($scope.restoreCode);
+				ptfId = MMApi.decodeId($scope.restoreCode);
 			}
 			if (ptfId !== "") {
 				MMApi.getPortfolio(ptfId, function (data) {
-					if (data && data.data && data.resultCode && data.resultCode === 0) {
+					if (data && data.data && data.resultCode === 0) {
+						console.log("restoring");
 						var ptfData = JSON.parse(data.data);
 						$scope.safeApply(function () {
 							$scope.portfolio = ptfData;
@@ -683,6 +688,18 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 					$scope.selectScreen(undefined);
 				});
 			}
+		}
+	};
+
+	$scope.shareApp = function () {
+		if (window.plugins) {
+			if (window.plugins.socialsharing) {
+				window.plugins.socialsharing.share(null, null, null, "https://play.google.com/store/apps/details?id=com.phonegap.mobmarketpro");
+			} else {
+				alert("window.plugins.socialsharing undefined");
+			}
+		} else {
+			alert("window.plugins undefined");
 		}
 	};
 
