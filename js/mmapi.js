@@ -17,10 +17,10 @@ var MMApi = {
 	},
 	decodeId: function (code) {
 		"use strict";
-		var i, res = "", key;
-		for (i = 0; i < code.length; i += 1) {
+		var i, res = "", key, ucode = code.toUpperCase();
+		for (i = 0; i < ucode.length; i += 1) {
 			for (key in this.codeMap) {
-				if (this.codeMap.hasOwnProperty(key) && this.codeMap[key].indexOf(code[i]) >= 0) {
+				if (this.codeMap.hasOwnProperty(key) && this.codeMap[key].indexOf(ucode[i]) >= 0) {
 					res += key;
 				}
 			}
@@ -29,15 +29,15 @@ var MMApi = {
 	},
 	setPortfolio: function (data, callback) {
 		"use strict";
-		var xhr = new window.XMLHttpRequest();
+		var xhr = new window.XMLHttpRequest(),
+			postData = {"data": data};
 		xhr.open("POST", this.apiUrl + "/portfolio.php?nocache=" + (new Date()).getTime().toString(), true);
 		xhr.onreadystatechange = function () {
 			var resObj;
 			if (typeof callback === "function") {
 				if (xhr.readyState === 4) {
 					if (xhr.status === 200) {
-						var s = xhr.responseText;
-						resObj = JSON.parse(s);
+						resObj = JSON.parse(xhr.responseText);
 						if (resObj && resObj.data && resObj.data.portfolioId) {
 							callback(resObj.data.portfolioId);
 						} else {
@@ -49,8 +49,8 @@ var MMApi = {
 				}
 			}
 		};
-		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-		xhr.send("data=" + JSON.stringify(data));
+		xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+		xhr.send(JSON.stringify(postData));
 	},
 	getPortfolio: function (id, callback) {
 		"use strict";

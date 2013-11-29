@@ -59,6 +59,7 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 	$scope.portfolios = [];
 	$scope.chooseQtyPtf = false;
 	$scope.inputQty = 1;
+	$scope.restoreCode = "";
 
 	// secure apply (prevent "digest in progress" collision)
 	$scope.safeApply = function (fn) {
@@ -628,22 +629,60 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 		$scope.loading = true;
 		$scope.backupRestoreDone = false;
 		$scope.backupSuccess = false;
+		$scope.restoreSuccess = false;
 		$scope.backupCode = "";
-		$scope.selectScreenById("backuprestorestatus");
+		$scope.enterRestoreCode = false;
 		if (action === "backup") {
+			$scope.selectScreenById("backuprestorestatus");
 			MMApi.setPortfolio($scope.portfolio, function (ptfId) {
-				var code = MMApi.encodeId(ptfId);
+				var code = "";
+				if (ptfId) {
+					code = MMApi.encodeId(ptfId);
+				}
 				if (code !== "") {
 					$scope.safeApply(function () {
+						$scope.backupCode = code;
 						$scope.backupRestoreDone = true;
 						$scope.backupSuccess = true;
-						$scope.backupCode = code;
 						$scope.loading = false;
+					});
+				} else {
+					$scope.safeApply(function () {
+						$scope.selectScreen(undefined);
 					});
 				}
 			});
+		} else if (action === "enterrestorecode") {
+			$scope.inputRestoreCode = "";
+			$scope.enterRestoreCode = true;
 		} else if (action === "restore") {
-			//...
+			var ptfId = "";
+			$scope.selectScreenById("backuprestorestatus");
+			if ($scope.restoreCode !== "") {
+				var ptfId = MMApi.decodeId($scope.restoreCode);
+			}
+			if (ptfId !== "") {
+				MMApi.getPortfolio(ptfId, function (data) {
+					if (data && data.data && data.resultCode && data.resultCode === 0) {
+						var ptfData = JSON.parse(data.data);
+						$scope.safeApply(function () {
+							$scope.portfolio = ptfData;
+							$scope.backupRestoreDone = true;
+							$scope.restoreSuccess = true;
+							$scope.loading = false;
+						});
+						window.localStorage.setItem("portfolio", JSON.stringify($scope.portfolio));
+					} else {
+						$scope.safeApply(function () {
+							$scope.selectScreen(undefined);
+						});
+					}
+				});
+			} else {
+				$scope.safeApply(function () {
+					$scope.selectScreen(undefined);
+				});
+			}
 		}
 	};
 

@@ -130,7 +130,7 @@ a {
 	-webkit-border-radius: 2px;
 }
 
-.inputSearch, .inputQty {
+.inputSearch, .inputQty, .inputRestoreCode {
 	outline: none;
 	background-color: #444444;
 	background-image: -webkit-linear-gradient(top, #545454, #444444);
@@ -148,6 +148,10 @@ a {
 
 .inputQty {
 	width: 98%;
+}
+
+.inputRestoreCode {
+	width: 90%;
 }
 
 .noResults {

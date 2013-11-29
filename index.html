@@ -285,7 +285,7 @@
 					<p>Backup your Portfolio data in the cloud, and restore your data from anywhere, anytime, on any device.</p>
 				</div>
 				<div>
-					<div style="float: left; font-size: 74px;">&#9000;</div>
+					<div style="float: left; font-size: 74px;"><img src="img/logo.png" /></div>
 					<div style="float: right; font-size: 74px;">&#9729;</div>
 					<div style="overflow: hidden; text-align: center; padding: 4px; margin: 4px;">
 						<div style="width: 98%">
@@ -293,7 +293,14 @@
 							<br /><br />
 						</div>
 						<div style="width: 98%">
-							<span class="chartButton" style="font-size: 21px; width: 90%;" touch-btn="restore" touch-action="backupRestore">&#8672; Restore</span>
+							<span class="chartButton" style="font-size: 21px; width: 90%;" touch-btn="enterrestorecode" touch-action="backupRestore">&#8672; Restore</span>
+						</div>
+						<div ng-show="enterRestoreCode" style="width: 98%">
+							<br /><br />
+							<input type="text" class="inputRestoreCode" ng-model="restoreCode" placeholder="Enter code" />
+							<br /><br />
+							<span class="chartButton" touch-btn="" touch-action="backupRestore">Cancel</span>
+							<span class="chartButton" style="margin-right: 14px;" touch-btn="restore" touch-action="backupRestore">Ok</span>
 						</div>
 					</div>
 				</div>
@@ -304,11 +311,14 @@
 				<div style="font-size: 74px;">&#9729;</div>
 				<div ng-hide="backupRestoreDone">Just a moment...</div>
 				<div ng-show="backupSuccess">
-					<p>Your Portfolio data has now been backed up. Please copy and save the following code. This code will be asked when restoring your data.</p>
+					<p>Your Portfolio data has now been backed up. Please save the following code. This code will be asked when restoring your data.</p>
 					<div class="listItem" style="font-size: 26px; font-weight: bold; text-shadow: 0 0 2px #ffffff;" ng-bind="backupCode"></div>
 					<span class="chartButton" style="width: 94%; margin-left: 8px;" touch-btn="" touch-action="selectScreen">Ok</span>
 				</div>
-				
+				<div ng-show="restoreSuccess">
+					<p>Your portfolio data has been restored.</p>
+					<span class="chartButton" style="width: 94%; margin-left: 8px;" touch-btn="" touch-action="selectScreen">Ok</span>
+				</div>
 			</div>
 		</div>
 	</div>
