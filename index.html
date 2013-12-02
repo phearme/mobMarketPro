@@ -321,7 +321,7 @@
 				<div ng-hide="backupRestoreDone">Just a moment...</div>
 				<div ng-show="backupSuccess">
 					<p>Your Portfolio data has now been backed up. Please save the following code. This code will be asked when restoring your data.</p>
-					<div class="listItem" style="font-size: 26px; font-weight: bold; text-shadow: 0 0 2px #ffffff;" ng-bind="backupCode"></div>
+					<div class="listItem" style="font-size: 26px; font-weight: bold; text-shadow: 0 0 2px #ffffff;" ng-bind="backupCode" touch-btn="" touch-action="shareBackupCode"></div>
 					<span class="chartButton" style="width: 94%; margin-left: 8px; font-size: 24px;" touch-btn="" touch-action="selectScreen">Ok</span>
 				</div>
 				<div ng-show="restoreSuccess">

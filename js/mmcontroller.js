@@ -56,7 +56,6 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 	$scope.chart = undefined;
 	$scope.watchlist = [];
 	$scope.portfolio = [];
-	$scope.portfolios = [];
 	$scope.chooseQtyPtf = false;
 	$scope.inputQty = 1;
 	$scope.restoreCode = "";
@@ -698,6 +697,12 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 		}
 	};
 
+	$scope.shareBackupCode = function () {
+		if (window.plugins && window.plugins.socialsharing && $scope.backupCode && $scope.backupCode !== "") {
+			window.plugins.socialsharing.share("Here is your mobMarket backup code: " + $scope.backupCode + " \nUse this code to restore your portfolio data on any device.", "mobMarket Backup Code");
+		}
+	};
+
 	// handle device back button
 	document.addEventListener("backbutton", function () {
 		$scope.safeApply(function () {
@@ -774,11 +779,10 @@ mmapp.directive("drawChart", function () {
 	};
 });
 
-/*
+
 document.addEventListener("deviceready", function () {
 	"use strict";
-*/
+
 	angular.bootstrap(document, ["mmapp"]);
-/*
+
 }, false);
-*/
