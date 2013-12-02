@@ -626,7 +626,6 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 	$scope.sortPortfolio();
 
 	$scope.backupRestore = function (action) {
-		$scope.loading = true;
 		$scope.backupRestoreDone = false;
 		$scope.backupSuccess = false;
 		$scope.restoreSuccess = false;
@@ -636,6 +635,7 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 			if ($scope.portfolio.length === 0) {
 				$scope.selectScreenById("portfolio");
 			} else {
+				$scope.loading = true;
 				$scope.selectScreenById("backuprestorestatus");
 				MMApi.setPortfolio($scope.portfolio, function (ptfId) {
 					var code = "";
@@ -661,11 +661,12 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 			$scope.enterRestoreCode = true;
 		} else if (action === "restore") {
 			var ptfId = "";
-			$scope.selectScreenById("backuprestorestatus");
 			if ($scope.restoreCode !== "") {
 				ptfId = MMApi.decodeId($scope.restoreCode);
 			}
 			if (ptfId !== "") {
+				$scope.loading = true;
+				$scope.selectScreenById("backuprestorestatus");
 				MMApi.getPortfolio(ptfId, function (data) {
 					if (data && data.data && data.resultCode === 0) {
 						console.log("restoring");
@@ -692,14 +693,8 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 	};
 
 	$scope.shareApp = function () {
-		if (window.plugins) {
-			if (window.plugins.socialsharing) {
-				window.plugins.socialsharing.share(null, null, null, "https://play.google.com/store/apps/details?id=com.phonegap.mobmarketpro");
-			} else {
-				alert("window.plugins.socialsharing undefined");
-			}
-		} else {
-			alert("window.plugins undefined");
+		if (window.plugins && window.plugins.socialsharing) {
+			window.plugins.socialsharing.share(null, null, null, "https://play.google.com/store/apps/details?id=com.phonegap.mobmarketpro");
 		}
 	};
 
