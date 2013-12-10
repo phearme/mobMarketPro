@@ -10,6 +10,8 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 	$scope.realTimeFrequency = 4500;
 	window.debugScope = $scope;
 	$scope.Math = window.Math;
+	//$scope.linkToProVersion = "https://play.google.com/store/apps/details?id=com.phonegap.mobmarketpro";
+	$scope.linkToProVersion = "http://www.amazon.com/gp/mas/dl/android?p=com.phonegap.mobmarketpro";
 	$scope.screens = [
 		{id: "search", label: "Search Quote", inMainMenu: true},
 		{id: "stockDetails", label: "", inMainMenu: false},
@@ -693,7 +695,7 @@ mmapp.controller("mmCtrl", function mmCtrl($scope) {
 
 	$scope.shareApp = function () {
 		if (window.plugins && window.plugins.socialsharing) {
-			window.plugins.socialsharing.share(null, null, null, "https://play.google.com/store/apps/details?id=com.phonegap.mobmarketpro");
+			window.plugins.socialsharing.share(null, null, null, $scope.linkToProVersion);
 		}
 	};
 
