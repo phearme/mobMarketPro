@@ -43,7 +43,7 @@
 		<div ng-show="selectedScreen.id == 'about'" class="content"  style="text-align: left;" ng-cloak>
 			<div style="font-weight: bold; margin: 8px;">
 				<h2>mobMarket Pro</h2>
-				<h3>Version 3.1.0</h3>
+				<h3>Version 3.1.1</h3>
 			</div>
 			<div style="margin: 8px;">
 				<p>Developed by Raphael Cohen.
@@ -133,7 +133,7 @@
 		</div>
 		<div ng-show="selectedScreen.id == 'news'" class="content" ng-cloak>
 			<div ng-repeat="newsItem in newsItems" touch-action="openLink" touch-btn="{{newsItem.link}}" class="listItem">
-				<img class="newsImage" ng-show="newsItem.image" ng-src="http:{{newsItem.image}}" />
+				<img class="newsImage" ng-show="newsItem.image" ng-src="https:{{newsItem.image}}" />
 				<div class="listTitle" ng-bind="newsItem.title"></div>
 				<div class="newsDate" ng-bind="newsItem.pubDate"></div>
 				<p class="listContent" ng-show="newsItem.content" ng-bind="newsItem.content"></p>

@@ -4,8 +4,8 @@
 <widget xmlns     = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "com.phonegap.mobmarketpro"
-        version   = "3.1.0"
-		versionCode	= "310">
+        version   = "3.1.1"
+		versionCode	= "311">
 
     <name>mobMarket Pro</name>
 
@@ -94,6 +94,12 @@
 
         Otherwise, you can specify specific domains:
     -->
+	<access origin="https://news.google.com" />
+	<access origin="http://*.google.com" />
+	<access origin="http://*.gstatic.com" />
+	<access origin="http://query.yahooapis.com" />
+	<access origin="http://autoc.finance.yahoo.com" />
+	<access origin="http://cohen.url.ph" />
 	<access origin="*" />
     <!--<access origin="http://127.0.0.1*"/>--> <!-- allow local pages -->
     <!--
