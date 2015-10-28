@@ -1,7 +1,8 @@
 /*jslint browser:true*/
 var YAHOO = {
 	searchCallback: undefined,
-	searchUrl: "http://autoc.finance.yahoo.com/autoc?callback=YAHOO.Finance.SymbolSuggest.ssCallback",
+	//searchUrl: "http://autoc.finance.yahoo.com/autoc?callback=YAHOO.Finance.SymbolSuggest.ssCallback",
+    searchUrl: "https://s.yimg.com/aq/autoc?region=US&lang=en-US&callback=YAHOO.Finance.SymbolSuggest.ssCallback",
 	search: function (searchString, callback) {
 		"use strict";
 		var url = this.searchUrl + "&query=" + window.escape(searchString).replace("%27", ";")
